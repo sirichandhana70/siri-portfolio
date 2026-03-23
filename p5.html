@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siri Chandhana | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root[data-theme="dark"] {
+            --bg: #05080a;
+            --bg2: #091214;
+            --bg3: #0d1a1d;
+            --card: #0d1e1f;
+            --card2: #12282b;
+            --border: #1a3a3a;
+            --accent: #10b981; 
+            --accent2: #34d399; 
+            --accent3: #fbbf24; 
+            --text: #ecfdf5;
+            --text2: #94a3b8;
+            --text3: #4a7a7a;
+            --glow: rgba(16, 185, 129, 0.15);
+            --glow2: rgba(52, 211, 153, 0.1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px; opacity: 0.1; pointer-events: none; z-index: 0;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2.5rem; background: rgba(5, 8, 10, 0.85);
+            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); font-weight: bold; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 0.8rem; font-weight: 600; color: var(--text2); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        section { position: relative; z-index: 1; padding: 6rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.8rem; }
+        .section-label::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--accent); }
+        .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; margin-bottom: 3rem; }
+
+        /* Hero */
+        #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+        .hero-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+        .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; color: var(--accent2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .hero-eyebrow::before { content: '▶'; font-size: 0.5rem; animation: blink 1.2s infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; line-height: 0.95; margin-bottom: 1.5rem; }
+        .hero-name .accent-word { display: block; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-tagline { font-size: 1rem; color: var(--text2); border-left: 2px solid var(--accent); padding-left: 1rem; margin-bottom: 2.5rem; }
+        
+        /* Updated Button Group Styling */
+        .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+        .btn-primary { font-family: 'Space Mono', monospace; font-size: 0.8rem; padding: 0.8rem 2rem; background: var(--accent); color: #000; text-decoration: none; font-weight: 700; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); transition: 0.2s; }
+        .btn-outline { font-family: 'Space Mono', monospace; font-size: 0.8rem; padding: 0.8rem 2rem; background: transparent; color: var(--text2); border: 1px solid var(--border); text-decoration: none; transition: 0.2s; }
+        .btn-primary:hover { transform: translateY(-3px); background: var(--accent2); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* Grid Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: 0.3s; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px var(--glow); }
+        .card h3 { font-family: 'Syne', sans-serif; margin-bottom: 1rem; }
+        
+        .tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 0.3rem 0.8rem; border: 1px solid var(--accent); color: var(--accent); margin: 0.2rem; display: inline-block; }
+
+        /* Education Timeline */
+        .edu-item { border-left: 1px solid var(--accent); padding: 0 0 2.5rem 2rem; position: relative; }
+        .edu-item::before { content: ''; position: absolute; left: -6px; top: 0; width: 11px; height: 11px; background: var(--accent); border-radius: 50%; }
+        .edu-degree { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; }
+        .edu-meta { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-top: 0.5rem; }
+
+        footer { text-align: center; padding: 4rem; border-top: 1px solid var(--border); }
+        
+        .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .hero-tagline { border-left: none; padding-left: 0; }
+            .hero-btns { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">SIRI<span>.</span>dev</div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+    </ul>
+</nav>
+
+<section id="hero">
+    <div class="hero-inner">
+        <div class="hero-content fade-up">
+            <div class="hero-eyebrow">Open to opportunities</div>
+            <h1 class="hero-name">Siri<br>Chandhana<span class="accent-word">Kunaguntla</span></h1>
+            
+            <p style="font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 500; color: var(--text2); margin-bottom: 0.6rem;">B.Tech CSE Student</p>
+            
+            <p class="hero-tagline">Building Secure Software | Python Developer | Threat Analyst</p>
+            
+            <div class="hero-btns">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="normalcv1final siri.docx" download class="btn-outline">Download CV</a>
+                <a href="https://www.linkedin.com/in/siri-chandhana-a95397284/?skipRedirect=true" target="_blank" class="btn-outline">LinkedIn</a>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;"></div>
+                <a href="https://github.com/sirichandhana70" target="_blank" class="btn-outline">GitHub</a>
+            </div>
+        </div>
+        <div class="fade-up" style="text-align: center;">
+            <div style="width: 300px; height: 300px; border: 1px solid var(--border); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--glow) 0%, transparent 70%);">
+                <span style="font-family: 'Space Mono', monospace; color: var(--accent); font-size: 1.5rem;"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" style="padding-top: 1rem">
+    <div class="section-label">01 — Profile</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="grid fade-up" style="grid-template-columns: 1fr 2fr;">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="card" style="padding: 1rem;">📍 Phagwara, Punjab</div>
+            <div class="card" style="padding: 1rem;">📞 Phagwara, Punjab</div>
+            <div class="card" style="padding: 1rem;">📧 sirichandhana70@gmail.com</div>
+            <div class="card" style="padding: 1rem;">🎓 CGPA: 7.00 </div>
+        </div>
+        <div style="color: var(--text2); line-height: 1.8;">
+            <p>I am a detail-oriented <strong>Computer Science Engineer</strong> with a deep focus on <strong>Cyber Security and Python Development</strong>. My journey is driven by the challenge of identifying vulnerabilities and building resilient digital infrastructures.</p>
+            <p style="margin-top: 1rem;">From designing corporate networks in <strong>Cisco Packet Tracer</strong> to developing secure login systems in <strong>Django</strong>, I bridge the gap between development and defense. I am a 4-Star HTML developer and a Top 10 Hackathon finisher.</p>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="section-label">02 — Capabilities</div>
+    <h2 class="section-title">Skills & Tools</h2>
+    <div class="grid fade-up">
+        <div class="card">
+            <h3>Development </h3>
+            <div class="tag">Python</div><div class="tag">Java</div><div class="tag">JavaScript</div><div class="tag">Django</div><div class="tag">Next.js</div>
+        </div>
+        <div class="card">
+            <h3>Cyber Security</h3>
+            <div class="tag">Kali Linux</div><div class="tag">Wireshark</div><div class="tag">Nmap</div><div class="tag">Burp Suite</div>
+        </div>
+        <div class="card">
+            <h3>Networking</h3>
+            <div class="tag">Cisco Packet Tracer</div><div class="tag">OSPF</div><div class="tag">Network Security</div>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="section-label">03 — Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="grid fade-up">
+        <div class="card">
+            <span style="font-family: 'Space Mono'; color: var(--accent); font-size: 0.7rem;">PROJECT / 01</span>
+            <h3>Online Code Editor</h3>
+            <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem;">Web-based execution environment for real-time coding directly in the browser.</p>
+            <div class="tag">Next.js</div><div class="tag">TypeScript</div><div class="tag">Tailwind</div>
+        </div>
+        <div class="card">
+            <span style="font-family: 'Space Mono'; color: var(--accent); font-size: 0.7rem;">PROJECT / 02</span>
+            <h3>Secure Login System</h3>
+            <p style="color: var(--text2); font-size: 0.9rem; margin-bottom: 1.5rem;">Scalable user authentication using Django with OAuth and role-based access.</p>
+            <div class="tag">Django</div><div class="tag">OAuth</div><div class="tag">MySQL</div>
+        </div>
+    </div>
+</section>
+
+<section id="certifications">
+    <div class="section-label">03 — Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="grid fade-up">
+        <div class="card">
+            <span class="card-meta">JULY 2025</span>
+            <h3>Python with OOPs</h3>
+            <p style="color: var(--text2); font-size: 0.85rem;">Mastered classes, inheritance, and polymorphism through hands-on data analysis projects.</p>
+            <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.7rem; margin-top: 10px; display: block;">CipherSchools</span>
+        </div>
+        <div class="card">
+            <span class="card-meta">SEP 2024</span>
+            <h3>Hardware & OS</h3>
+            <p style="color: var(--text2); font-size: 0.85rem;">Comprehensive foundation in operating system management and computer hardware fundamentals.</p>
+            <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.7rem; margin-top: 10px; display: block;">IBM (Coursera)</span>
+        </div>
+        <div class="card">
+            <span class="card-meta">OCT 2023</span>
+            <h3>Web Design</h3>
+            <p style="color: var(--text2); font-size: 0.85rem;">Certified mastery of responsive web design principles using modern HTML and CSS.</p>
+            <span style="color: var(--accent); font-family: 'Space Mono'; font-size: 0.7rem; margin-top: 10px; display: block;">FreeCodeCamp</span>
+        </div>
+    </div>
+</section>
+
+<section id="achievements">
+    <div class="section-label">05— Milestones</div>
+    <h2 class="section-title">Achievements</h2>
+    <div class="grid fade-up">
+        <div class="card">
+            <span style="font-size: 2rem; display: block; margin-bottom: 1rem;">🏆</span>
+            <h3>Hackathon Top 10</h3>
+            <p style="color: var(--text2); font-size: 0.9rem;">Achieved <strong>Top 10 Rank</strong> in the 24-hour <strong>Code-A-Hunt Hackathon</strong> at LPU, demonstrating problem-solving and teamwork[cite: 40, 105, 106].</p>
+        </div>
+        <div class="card">
+            <span style="font-size: 2rem; display: block; margin-bottom: 1rem;">⭐</span>
+            <h3>4-Star HTML Rank</h3>
+            <p style="color: var(--text2); font-size: 0.9rem;">Secured a <strong>4-Star ranking</strong> on Free Code Camp, proving high proficiency in <strong>Responsive Web Design</strong>[cite: 107, 108].</p>
+        </div>
+    </div>
+</section>
+
+<section id="education">
+    <div class="section-label">06 — Academic</div>
+    <h2 class="section-title">Education </h2>
+    <div class="fade-up">
+        <div class="edu-item">
+            <div class="edu-degree">B.Tech - Computer Science & Engineering </div>
+            <div style="color: var(--text2);">Lovely Professional University, Punjab </div>
+            <div class="edu-meta">📅 2023 — Present | Grade: 7.00 CGPA </div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-degree">Intermediate (Class XII) </div>
+            <div style="color: var(--text2);">Sri Chaitanya College, Hyderabad </div>
+            <div class="edu-meta">📅 2021 — 2023 | Grade: 83.1% </div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-degree">Matriculation (Class X) </div>
+            <div style="color: var(--text2);">Genesis International School, Hyderabad </div>
+            <div class="edu-meta">📅 2020 - 2021 | Grade: 68% </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div style="font-family: 'Syne'; font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">Siri Chandhana </div>
+    <p style="font-family: 'Space Mono'; font-size: 0.8rem; color: var(--text3);"></p>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
